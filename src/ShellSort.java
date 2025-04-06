@@ -1,35 +1,21 @@
-public class ShellSort {
-    public static Resultado sort(int[] vetor) {
-        int trocas = 0;
+class ShellSort {
+    public static void ordenar(int[] vetor) {
         int n = vetor.length;
-
-        // Geração do incremento (sequência de Knuth: h = h * 3 + 1)
-        int h = 1;
-        while (h < n) {
-            h = h * 3 + 1;
-        }
-        h = h / 3;
-
-        int elemento, j;
-
-        while (h > 0) {
-            for (int i = h; i < n; i++) {
-                elemento = vetor[i];
-                j = i;
-
-                while (j >= h && vetor[j - h] > elemento) {
-                    vetor[j] = vetor[j - h];
-                    j -= h;
-                    trocas++;
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < n; i++) {
+                int temp = vetor[i];
+                int j;
+                for (j = i; j >= gap; j -= gap) {
+                    Resultado.incrementaComparacoes();
+                    if (vetor[j - gap] > temp) {
+                        vetor[j] = vetor[j - gap];
+                        Resultado.incrementaTrocas();
+                    } else {
+                        break;
+                    }
                 }
-
-                vetor[j] = elemento;
-                trocas++;
+                vetor[j] = temp;
             }
-
-            h = h / 2;
         }
-
-        return new Resultado(vetor, trocas);
     }
 }

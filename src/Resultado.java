@@ -1,20 +1,25 @@
-public class Resultado {
-    private int[] vetor;
-    private int trocas;
+class Resultado {
+    private static long comparacoes = 0;
+    private static long trocas = 0;
 
-    // Construtor
-    public Resultado(int[] vetor, int trocas) {
-        this.vetor = vetor;
-        this.trocas = trocas;
+    public static void resetar() {
+        comparacoes = 0;
+        trocas = 0;
     }
 
-    // Getter do vetor ordenado
-    public int[] getVetor() {
-        return vetor;
+    public static void incrementaComparacoes() {
+        comparacoes++;
     }
 
-    // Getter da quantidade de trocas
-    public int getTrocas() {
+    public static void incrementaTrocas() {
+        trocas++;
+    }
+
+    public static long getComparacoes() {
+        return comparacoes;
+    }
+
+    public static long getTrocas() {
         return trocas;
     }
 }

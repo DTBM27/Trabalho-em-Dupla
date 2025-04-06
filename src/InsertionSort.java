@@ -1,23 +1,19 @@
-public class InsertionSort {
-    public static Resultado sort(int[] vetor) {
-        int trocas = 0;
-        int aux, j;
-
-        // Insertion Sort O(n²)
+class InsertionSort {
+    public static void ordenar(int[] vetor) {
         for (int i = 1; i < vetor.length; i++) {
-            aux = vetor[i];
-            j = i - 1;
-
-            while (j >= 0 && vetor[j] > aux) {
-                vetor[j + 1] = vetor[j];
-                j--;
-                trocas++;
+            int chave = vetor[i];
+            int j = i - 1;
+            while (j >= 0) {
+                Resultado.incrementaComparacoes();
+                if (vetor[j] > chave) {
+                    vetor[j + 1] = vetor[j];
+                    Resultado.incrementaTrocas();
+                    j--;
+                } else {
+                    break;
+                }
             }
-
-            vetor[j + 1] = aux;
-            trocas++;
+            vetor[j + 1] = chave;
         }
-
-        return new Resultado(vetor, trocas);
     }
 }

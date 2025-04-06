@@ -1,27 +1,20 @@
-public class SelectionSort {
-    public static Resultado sort(int[] vetor) {
-        int trocas = 0;
-        int posicao_menor, aux;
-
-        // Selection Sort O(n²)
-        for (int i = 0; i < vetor.length - 1; i++) {
-            posicao_menor = i;
-
-            for (int j = i + 1; j < vetor.length; j++) {
-                if (vetor[j] < vetor[posicao_menor]) {
-                    posicao_menor = j;
+class SelectionSort {
+    public static void ordenar(int[] vetor) {
+        int n = vetor.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                Resultado.incrementaComparacoes();
+                if (vetor[j] < vetor[minIndex]) {
+                    minIndex = j;
                 }
             }
-
-            // Se encontrou uma posição diferente, faz a troca
-            if (posicao_menor != i) {
-                aux = vetor[i];
-                vetor[i] = vetor[posicao_menor];
-                vetor[posicao_menor] = aux;
-                trocas++;
+            if (minIndex != i) {
+                int temp = vetor[minIndex];
+                vetor[minIndex] = vetor[i];
+                vetor[i] = temp;
+                Resultado.incrementaTrocas();
             }
         }
-
-        return new Resultado(vetor, trocas);
     }
 }

@@ -1,32 +1,28 @@
-public class ComboSort {
-    public static Resultado sort(int[] vetor) {
-        int trocas = 0;
-        int n = vetor.length;
-        int gap = n;
-        boolean trocou = true;
-        final double SHRINK = 1.3;
+class ComboSort {
+    public static void ordenar(int[] vetor) {
+        int gap = vetor.length;
+        boolean trocado = true;
 
-        while (gap > 1 || trocou) {
-            // Atualiza o gap
-            gap = (int) (gap / SHRINK);
-            if (gap < 1) {
-                gap = 1;
-            }
+        while (gap != 1 || trocado) {
+            gap = getProximoGap(gap);
+            trocado = false;
 
-            trocou = false;
-
-            for (int i = 0; i + gap < n; i++) {
+            for (int i = 0; i < vetor.length - gap; i++) {
+                Resultado.incrementaComparacoes();
                 if (vetor[i] > vetor[i + gap]) {
-                    // Troca os elementos
                     int temp = vetor[i];
                     vetor[i] = vetor[i + gap];
                     vetor[i + gap] = temp;
-                    trocas++;
-                    trocou = true;
+                    Resultado.incrementaTrocas();
+                    trocado = true;
                 }
             }
         }
+    }
 
-        return new Resultado(vetor, trocas);
+    private static int getProximoGap(int gap) {
+        gap = (gap * 10) / 13;
+        if (gap < 1) return 1;
+        return gap;
     }
 }
